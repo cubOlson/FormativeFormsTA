@@ -1,0 +1,35 @@
+extends layout.pug
+
+mixin option(value, text)
+  option(value=value selected=(value === favoriteBeatle)) #{text}
+
+block content
+  h1= title
+  if errors 
+    ul 
+        p The following errors were found:
+        each error in errors 
+            li= error
+  form(action=`/create-interesting` method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    label First Name
+    input(type='text' name='firstName' placeholder=firstName)
+    label Last Name
+    input(type='text' name='lastName' placeholder=lastName)
+    label Email
+    input(type='text' name='email' placeholder=email)
+    Label Favorite Beatle 
+    select(name='favoriteBeatle' placeholder=favoriteBeatle)
+        option(value='John Lennon') John Lennon
+        option(value='Paul McCartney') Paul McCartney
+        option(value='George Harrison') George Harrison
+        option(value='Ringo Star') Ringo Star
+    label Age 
+    input(type='text' name='age' value=age)
+    label(for='iceCream') Likes Ice Cream
+    input(type='checkbox' checked=(iceCream === 'on') name="iceCream")
+    label Password
+    input(type='text' name='password')
+    label Confirm Password
+    input(type='text' name='confirmedPassword')
+    button(type='submit') Submit
