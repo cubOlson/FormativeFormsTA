@@ -2,22 +2,22 @@ extends layout.pug
 
 block content
   h1= title
-  if errors 
-    ul 
-      p The following errors were found:
-      each error in errors 
+  if errors
+    p The following errors were found:
+    ul
+      each error in errors
         li= error
-  form(action='/create' method='post')
+  form.form-group(action='/create' method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
     label First Name
-    input(type='text' name='firstName' placeholder=firstName)
+    input.form-control(type='text' name='firstName' value=firstName)
     label Last Name
-    input(type='text' name='lastName' placeholder=lastName)
+    input.form-control(type='text' name='lastName' value=lastName)
     label Email
-    input(type='text' name='email' placeholder=email)
+    input.form-control(type='email' name='email' value=email)
     label Password
-    input(type='text' name='password')
+    input.form-control(type='password' name='password')
     label Confirm Password
-    input(type='text' name='confirmedPassword')
-    button(type='submit') Submit
+    input.form-control(type='password' name='confirmedPassword')
+    input.btn.btn-primary(type='submit' value= "Create User")
 

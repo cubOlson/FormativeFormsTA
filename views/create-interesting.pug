@@ -5,31 +5,33 @@ mixin option(value, text)
 
 block content
   h1= title
-  if errors 
-    ul 
-        p The following errors were found:
-        each error in errors 
-            li= error
-  form(action=`/create-interesting` method='post')
+  if errors
+    p The following errors were found:
+    ul
+      each error in errors
+        li= error
+  form.form-group(action=`/create-interesting` method='post')
     input(type='hidden' name='_csrf' value=csrfToken)
     label First Name
-    input(type='text' name='firstName' placeholder=firstName)
+    input.form-control(type='text' name='firstName' value=firstName)
     label Last Name
-    input(type='text' name='lastName' placeholder=lastName)
+    input.form-control(type='text' name='lastName' value=lastName)
     label Email
-    input(type='text' name='email' placeholder=email)
-    Label Favorite Beatle 
-    select(name='favoriteBeatle' placeholder=favoriteBeatle)
-        option(value='John Lennon') John Lennon
-        option(value='Paul McCartney') Paul McCartney
-        option(value='George Harrison') George Harrison
-        option(value='Ringo Star') Ringo Star
-    label Age 
-    input(type='text' name='age' value=age)
-    label(for='iceCream') Likes Ice Cream
-    input(type='checkbox' checked=(iceCream === 'on') name="iceCream")
+    input.form-control(type='email' name='email' value=email)
+    Label Favorite Beatle
+    select.form-control(name='favoriteBeatle' value=favoriteBeatle)
+      option(value='' selected=(value===favoriteBeatle)) --Please choose an option--
+      option(value='John' selected=(value===favoriteBeatle)) John
+      option(value='Paul' selected=(value===favoriteBeatle)) Paul
+      option(value='George' selected=(value===favoriteBeatle)) George
+      option(value='Ringo' selected=(value===favoriteBeatle)) Ringo
+      option(value='Scooby-Doo' selected=(value===favoriteBeatle)) Scooby-Doo
+    label Age
+    input.form-control(type='number' name='age' value=age)
+    label(for='defaultCheck1') Likes Ice Cream
+    input.form-control(type='checkbox' checked=(iceCream === 'on') name="iceCream")
     label Password
-    input(type='text' name='password')
+    input.form-control(type='password' name='password')
     label Confirm Password
-    input(type='text' name='confirmedPassword')
-    button(type='submit') Submit
+    input.form-control(type='password' name='confirmedPassword')
+    input.btn.btn-primary(type='submit' value="Create Interesting User")

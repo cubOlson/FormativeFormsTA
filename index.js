@@ -70,7 +70,7 @@ app.post('/create', csrfProtection, (req, res, next) => {
 	}
 
 	const newUser = {
-		firstName, lastName, email
+		id: users.length + 1, firstName, lastName, email
 	}
 
 	users.push(newUser);
@@ -101,14 +101,6 @@ app.post('/create-interesting', csrfProtection, (req, res, next) => {
 		errors.push('Please provide an email.');
 	}
 
-	if (!age) {
-		errors.push('Please provide your age.');
-	}
-
-	if (!favoriteBeatle) {
-		errors.push('Please provide a Beatle. No Ringo.');
-	}
-
 	if (!password) {
 		errors.push('Please provide a password.');
 	}
@@ -116,6 +108,25 @@ app.post('/create-interesting', csrfProtection, (req, res, next) => {
 	if (password && password !== confirmedPassword) {
 		errors.push('The provided values for the password and password confirmation fields did not match.');
 	}
+
+	const beatles = 'johnpaulringogeorge';
+
+	if (!favoriteBeatle) {
+		errors.push('favoriteBeatle is required');
+	} else if (!beatles.includes(favoriteBeatle.toLowerCase())) {
+		errors.push('favoriteBeatle must be a real Beatle member')
+	}
+	
+	if (!age) {
+		errors.push('age is required');
+	} else if (typeof age !== 'number') {
+		errors.push('age must be a valid age')
+	}else if (age < 10 || age > 120 ) {
+		errors.push('age must be a valid age')
+	}
+
+
+
 
 	if (errors.length) {
 		res.render('create-interesting', {
@@ -131,7 +142,7 @@ app.post('/create-interesting', csrfProtection, (req, res, next) => {
 	}
 
 	const newUser = {
-		firstName, lastName, email, iceCream: iceCream === 'on', favoriteBeatle, age
+		id: users.length + 1, firstName, lastName, email, iceCream: iceCream === 'on', favoriteBeatle, age
 	};
 
 	users.push(newUser);
