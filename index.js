@@ -1,8 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const { check, validationResult } = require('express-validator');
 const csrf = require('csurf');
 const morgan = require('morgan');
+
+//Beatles check still broken
 
 const app = express();
 
@@ -116,12 +117,13 @@ app.post('/create-interesting', csrfProtection, (req, res, next) => {
 	} else if (!beatles.includes(favoriteBeatle.toLowerCase())) {
 		errors.push('favoriteBeatle must be a real Beatle member')
 	}
-	
+
+	console.log(typeof age)
 	if (!age) {
 		errors.push('age is required');
 	} else if (typeof age !== 'number') {
 		errors.push('age must be a valid age')
-	}else if (age < 10 || age > 120 ) {
+	}else if (parseInt(age, 10) < 10 || parseInt(age, 10) > 120 ) {
 		errors.push('age must be a valid age')
 	}
 
@@ -135,10 +137,11 @@ app.post('/create-interesting', csrfProtection, (req, res, next) => {
 			email,
 			iceCream,
 			favoriteBeatle,
-			age,
+			age: parseInt(age, 10),
 			errors, 
 			csrfToken: req.csrfToken()
-		})
+		});
+		return;
 	}
 
 	const newUser = {

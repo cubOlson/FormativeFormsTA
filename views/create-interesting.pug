@@ -20,12 +20,12 @@ block content
     input.form-control(type='email' name='email' value=email)
     Label Favorite Beatle
     select.form-control(name='favoriteBeatle' value=favoriteBeatle)
-      option(value='' selected=(value===favoriteBeatle)) --Please choose an option--
-      option(value='John' selected=(value===favoriteBeatle)) John
-      option(value='Paul' selected=(value===favoriteBeatle)) Paul
-      option(value='George' selected=(value===favoriteBeatle)) George
-      option(value='Ringo' selected=(value===favoriteBeatle)) Ringo
-      option(value='Scooby-Doo' selected=(value===favoriteBeatle)) Scooby-Doo
+      option(value='' selected=(''===favoriteBeatle)) --Please choose an option--
+      option(value='John' selected=('John'===favoriteBeatle)) John
+      option(value='Paul' selected=('Paul'===favoriteBeatle)) Paul
+      option(value='George' selected=('George'===favoriteBeatle)) George
+      option(value='Ringo' selected=('Ringo'===favoriteBeatle)) Ringo
+      option(value='Scooby-Doo' selected=('Scooby-Doo'===favoriteBeatle)) Scooby-Doo
     label Age
     input.form-control(type='number' name='age' value=age)
     label(for='defaultCheck1') Likes Ice Cream
